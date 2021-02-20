@@ -1,0 +1,34 @@
+<div class="card border-primary mb-12" style="max-width: 100rem;">
+    <div class="card-header">
+        <input  type="text" class="form-control" id="seachBox"  placeholder="Search Football Player.."  [(ngModel)]="filterText">
+      
+      </div>
+    <div class="card-body">
+     <div *ngIf="filterText"style="margin-bottom: 10px;">
+      <small>Results for : {{filterText}}</small>
+     </div> 
+      
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div *ngFor="let player of players | playerFilterPipe:filterText" class="col">
+          <div class="card shadow-sm">
+            <img
+              class="bd-placeholder-img card-img-top"
+              width="100%"
+              height="225"
+              [src]="player.avatar"
+              alt=""
+            />
+            <div class="card-body">
+              <p class="card-text"><b>{{player.name}}</b></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Position: {{player.position}}</small>
+                <small class="text-muted">Age: {{player.age}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
