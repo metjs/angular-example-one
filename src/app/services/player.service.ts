@@ -8,7 +8,11 @@ export class PlayerService {
 
   constructor(private http:HttpClient) { }
   path = "http://localhost:3000/player";
-  getPlayer():Observable<Iplayer[]>{
-    return  this.http.get<Iplayer[]>(this.path);
+  getPlayer(teamId):Observable<Iplayer[]>{
+    let newPath = this.path;
+    if(teamId){
+      newPath += "?teamId="+teamId;
+    }
+    return  this.http.get<Iplayer[]>(newPath);
   }
 }

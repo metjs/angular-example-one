@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from '../services/player.service';
 import { Iplayer } from './iplayer';
 
@@ -10,11 +11,14 @@ import { Iplayer } from './iplayer';
 })
 export class PlayerListComponent implements OnInit {
 
-  constructor(private playerService:PlayerService) { }
+  constructor(private playerService:PlayerService,private activatedRoute:ActivatedRoute) { }
   filterText=""
   players : Iplayer[] =[]
   ngOnInit() {
-    this.playerService.getPlayer().subscribe(data=> {this.players   = data});
+    this.activatedRoute.params.subscribe(params=>{
+      this.playerService.getPlayer(params["teamId"]).subscribe(data=> {this.players   = data});
+    })
+   
   }
 
 }
